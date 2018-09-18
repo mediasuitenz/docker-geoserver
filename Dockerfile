@@ -14,6 +14,9 @@ ENV GEOSERVER_DATA_DIR /usr/lib/geoserver-data
 RUN wget https://sourceforge.net/projects/geoserver/files/GeoServer/2.13.2/extensions/geoserver-2.13.2-vectortiles-plugin.zip/download -O /tmp/vt-plugin.zip
 RUN unzip /tmp/vt-plugin.zip -d "/usr/share/geoserver/webapps/geoserver/WEB-INF/lib/"
 
+# replace web.xml to enable CORS
+COPY ./web.xml /usr/share/geoserver/webapps/geoserver/WEB-INF/web.xml
+
 EXPOSE 8080
 
 CMD "/usr/share/geoserver/bin/startup.sh"
